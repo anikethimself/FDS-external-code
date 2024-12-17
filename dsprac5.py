@@ -1,3 +1,7 @@
+"""
+Write a python program to store roll numbers of student in array who attended training program in random order. 
+Write function for searching whether particular student attended training program or not, using Sentinel search.
+"""
 def sentinel_search(arr, target):
     n = len(arr)
     if n == 0:
@@ -26,7 +30,6 @@ def main():
     print("Roll numbers of students who attended the training program:", roll_numbers)
     target_roll_number = int(input("Enter the roll number to search: "))
             
-	#search using sentinel search
     index_sentinel = sentinel_search(roll_numbers.copy(), target_roll_number)  
     if index_sentinel != -1:
         print(f"Sentinel Search: Roll number {target_roll_number} found at index {index_sentinel}.")
@@ -35,4 +38,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
