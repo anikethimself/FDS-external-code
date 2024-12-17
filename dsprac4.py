@@ -18,7 +18,6 @@ def main():
     print("Roll numbers of students who attended the training program:", roll_numbers)
     target_roll_number = int(input("Enter the roll number to search: "))
     
-	#search using sentinel search
     index_linear = linear_search(roll_numbers, target_roll_number)
     if index_linear != -1:
         print(f"Linear Search: Roll number {target_roll_number} found at index {index_linear}.")
@@ -27,4 +26,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
