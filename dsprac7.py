@@ -1,5 +1,8 @@
+"""
+Write a python program to store roll numbers of student array who attended training program in sorted order.
+Write function for searching whether particular student attended training program or not, using Fibonacci search.
+"""
 def fibonacci_search(arr, x):
-   
     m2 = 0  
     m1 = 1  
     fib_m = m2 + m1  
@@ -51,4 +54,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
