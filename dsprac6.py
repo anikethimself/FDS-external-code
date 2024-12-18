@@ -2,33 +2,33 @@
 Write a python program to store roll numbers of student array who attended training program in sorted order. 
 Write function for searching whether particular student attended training program or not, using Binary search.
 """
-def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
+def binary_search(arr,target):
+    n=len(arr)
+    low=0
+    high=n-1
+    
+    while low<=high:
+        mid=(low+high)//2
+        
+        if arr[mid]==target:
             return mid
-        elif arr[mid] < target:
-            left = mid + 1
+        elif arr[mid]<target:
+            low=mid+1 
         else:
-            right = mid - 1
-    return -1
-
+            high=mid-1 
+    return -1 
+    
 def main():
-   
-    roll_numbers = [101, 102, 105, 110, 115, 120, 125, 130, 135]
-
-    print("Roll numbers of students who attended the training program:")
-    print(roll_numbers)
-  
-    target_roll = int(input("Enter roll number to search: "))
-
-    binary_result = binary_search(roll_numbers, target_roll)
-    if binary_result != -1:
-        print(f"Binary Search: Roll number {target_roll} found at index {binary_result}.")
+    roll_no=[101,102,103,104,105,106,107]
+    
+    roll_no.sort()
+    print("The roll no who attended the training program:",roll_no)
+    target_roll=int(input("Enter the roll no to search:"))
+    
+    index=binary_search(roll_no,target_roll)
+    if index!=-1:
+        print(f"The roll no. {target_roll} is found at index {index}. ")
     else:
-        print(f"Binary Search: Roll number {target_roll} not found.")
-
-if __name__ == "__main__":
+        print("not found!!!!!!!!!")
+if __name__=="__main__":
     main()
-
