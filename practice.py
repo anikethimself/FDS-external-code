@@ -1,47 +1,52 @@
-class Linearprob:
-    def __init__(self,size):
-        self.size=size
-        self.table=[None]*size
-    
-    def hash_function(self,phone):
-        return int(phone)%self.size
-    
-    def insert(self,phone,name):
-        index=self.hash_function(phone)
-        comp=1
-        while self.table[index] is not None:
-            index=(index+1)%self.size
-            comp+=1
-        self.table[index]=(phone,name)
-        return comp
-    
-    def search(self,phone):
-        index=self.hash_function(phone)
-        comp=1
-        while self.table[index] is not None:
-            if self.table[index][0]==phone:
-                return comp
-            index=(index+1)%self.size
-            comp+=1
-        return comp
+class HashTable:
+    def __init__(self, size):
+        self.size = size
+        self.table = [None] * size
 
-contacts={
-    "1234":"aniket",
-    "5678":"boi",
-    "9101":"maba",
-    "1121":"heks",
-    "3141":"bbfn",
-    "5161":"dsdd"
-}
-size=7
-Linear_table=Linearprob(size)
+    def hash_function(self, key):
+        return key % self.size
 
-print("Insert comparisons:")
-for phone, name in contacts.items():
-    lp_cmp=Linear_table.insert(phone,name)
-    print(f"{phone} ({name}) : Linear={lp_cmp}")
+    def insert_without_replacement(self, key):
+        index = self.hash_function(key)
+        for i in range(self.size):
+            new_index = (index + i) % self.size
+            if self.table[new_index] is None:
+                self.table[new_index] = key
+                return
+        print("Table full!")
 
-print("\nsearch comparisons:")
-for phone in contacts.keys():
-    lp_cmp=Linear_table.search(phone)
-    print(f"{phone}: Linear={lp_cmp}")
+    def insert_with_replacement(self, key):
+        index = self.hash_function(key)
+        if self.table[index] is None:
+            self.table[index] = key
+        else:
+            existing_key = self.table[index]
+            if self.hash_function(existing_key) != index:
+                # Replace and reinsert the existing key
+                self.table[index] = key
+                self.insert_without_replacement(existing_key)
+            else:
+                self.insert_without_replacement(key)
+
+    def display(self):
+        print("Hash Table:")
+        for i in range(self.size):
+            print(f"{i}: {self.table[i]}")
+
+
+# Example usage
+print("Without Replacement:")
+ht1 = HashTable(7)
+ht1.insert_without_replacement(10)
+ht1.insert_without_replacement(3)
+ht1.insert_without_replacement(17)
+ht1.insert_without_replacement(24)
+ht1.display()
+
+print("\nWith Replacement:")
+ht2 = HashTable(7)
+ht2.insert_with_replacement(10)
+ht2.insert_with_replacement(3)
+ht2.insert_with_replacement(17)
+ht2.insert_with_replacement(24)
+ht2.display()
